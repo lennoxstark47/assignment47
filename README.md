@@ -1,100 +1,161 @@
-# Audio Similarity Detection - Week 1
+# Audio Similarity Detection System
 
-**Milestone:** Set up development environment; experiment with Web Audio API/Librosa
-**Week:** 10/11/25
-**Status:** ✅ Completed
+**Project:** Web-Based Music Plagiarism Detection
+**Duration:** September 2025 - May 2026
+**Current Status:** Week 17/11/25 - Audio Upload & Waveform Display ✅
 
-## What Was Done This Week
+## Project Overview
 
-This week focused on setting up the development environment and conducting initial experiments with both server-side (Librosa) and client-side (Web Audio API) audio processing approaches.
+A web application for detecting melodic and rhythmic similarities between music tracks to assist in plagiarism identification. Uses advanced audio processing techniques (Librosa) with an intuitive web interface.
 
-## Files Created
+## Current Progress
 
-### Backend (Python + Librosa)
+### ✅ Completed Milestones
+
+**Week 10/11/25: Development Environment Setup**
+- Python backend with Librosa
+- Web Audio API experiments
+- Technology stack evaluation
+- [View Details](TECH_STACK_EVALUATION.md)
+
+**Week 17/11/25: Audio Upload & Waveform Display**
+- Flask RESTful API with upload endpoint
+- Interactive web interface with drag-and-drop
+- Real-time waveform visualization
+- Audio metadata extraction
+- [View Details](WEEK_17_11_25.md)
+
+## Project Structure
+
 ```
-backend/
-├── requirements.txt                    # Python dependencies
-└── experiments/
-    ├── librosa_experiment.py          # Librosa feature extraction demo
-    ├── test_audio.wav                 # Generated test audio (5 seconds)
-    ├── librosa_features.png           # Feature visualizations
-    └── librosa_results.json           # Extraction results
+assignment47/
+├── backend/
+│   ├── app.py                          # Flask application
+│   ├── test_upload.py                  # Test script
+│   ├── requirements.txt                # Python dependencies
+│   └── experiments/
+│       ├── librosa_experiment.py       # Feature extraction demo
+│       ├── test_audio.wav              # Test audio (5 seconds)
+│       ├── librosa_features.png        # Feature visualizations
+│       └── librosa_results.json        # Extraction results
+│
+├── frontend/
+│   └── index.html                      # Web interface
+│
+├── web_audio_experiment.html           # Web Audio API experiment
+├── INSTRUCTIONS.md                     # Project timeline & workflow
+├── TECH_STACK_EVALUATION.md            # Technology comparison
+├── WEEK_17_11_25.md                    # Week 2 milestone docs
+└── README.md                           # This file
 ```
 
-### Frontend (Web Audio API)
-```
-web_audio_experiment.html              # Simple Web Audio API test
-```
+## Quick Start
 
-### Documentation
-```
-TECH_STACK_EVALUATION.md               # Technology comparison
-INSTRUCTIONS.md                         # Project timeline & workflow
-```
+### Running the Application
 
-## How to Run Experiments
+1. **Set up backend:**
+   ```bash
+   cd backend
+   python3 -m venv venv
+   source venv/bin/activate  # Windows: venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
 
-### Librosa Experiment
+2. **Start Flask server:**
+   ```bash
+   python app.py
+   ```
 
+3. **Access the application:**
+   - Open browser to `http://localhost:5000`
+   - Upload an audio file (MP3, WAV, OGG, FLAC, M4A)
+   - View waveform visualization and metadata
+
+### Running Experiments
+
+**Librosa Experiment:**
 ```bash
-# Navigate to backend directory
 cd backend
-
-# Create virtual environment
-python3 -m venv venv
-
-# Activate virtual environment
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Run experiment
+source venv/bin/activate
 python experiments/librosa_experiment.py
 ```
 
-**Output:**
-- Generates test audio file
-- Extracts MFCC, chromagram, spectral features
-- Creates visualization PNG
-- Saves results to JSON
-
-### Web Audio API Experiment
-
+**Web Audio API Experiment:**
 ```bash
-# Simply open in browser
-open web_audio_experiment.html
-# Or: python3 -m http.server 8000
-# Then visit: http://localhost:8000/web_audio_experiment.html
+# Open web_audio_experiment.html in browser
+python3 -m http.server 8000
+# Visit: http://localhost:8000/web_audio_experiment.html
 ```
 
-**Features:**
-- Upload audio file
-- Display basic features (duration, sample rate, RMS, ZCR)
-- Draw waveform visualization
+## Current Features
 
-## Key Findings
+### Audio Upload & Processing
+- ✅ Drag-and-drop file upload interface
+- ✅ Support for multiple audio formats (MP3, WAV, OGG, FLAC, M4A)
+- ✅ File validation (type and size checks, max 10MB)
+- ✅ Real-time processing feedback
 
-**Librosa (Server-side):**
-- ✅ Provides MFCCs, chromagram, spectral features
-- ✅ Processing time: ~22 seconds (can be optimized)
-- ✅ Suitable for achieving 80%+ accuracy target
+### Waveform Visualization
+- ✅ HTML5 Canvas-based waveform display
+- ✅ Efficient data downsampling (1000 points)
+- ✅ Responsive design
+- ✅ Audio metadata display (duration, sample rate, RMS energy)
 
-**Web Audio API (Client-side):**
-- ✅ Fast processing (<1 second)
-- ✅ Good for waveform visualization
-- ❌ Missing MFCC and chromagram support
-- ❌ Not suitable for main similarity detection
+### Backend API
+- ✅ RESTful upload endpoint (`POST /api/upload`)
+- ✅ Health check endpoint (`GET /api/health`)
+- ✅ Librosa-based audio processing
+- ✅ Automated testing suite
 
-**Recommendation:** Use Librosa for backend processing, Web Audio API for frontend visualization only.
+## Technology Stack
 
-## Next Steps
+**Backend:**
+- Python 3.8+
+- Flask (Web framework)
+- Librosa (Audio processing)
+- NumPy, SciPy (Scientific computing)
 
-**Week of 17/11/25:** Implement audio file upload and basic waveform display
-- Create Flask application with upload endpoint
-- Build basic frontend interface
-- Integrate waveform visualization
+**Frontend:**
+- HTML5, CSS3, JavaScript
+- Canvas API (Waveform visualization)
+- Responsive design (no frameworks yet)
 
----
+**Planned:**
+- Feature extraction (MFCC, Chroma) - Week 24/11/25
+- Similarity algorithms (DTW, Cosine) - Week 1/12/25
+- Comparison visualization - Week 8/12/25
 
-See [INSTRUCTIONS.md](INSTRUCTIONS.md) for full project timeline and workflow.
+## Next Milestone
+
+**Week 24/11/25: Feature Extraction Module**
+- Develop MFCC/Chroma extraction module
+- Integrate with upload system
+- Save/retrieve extracted features
+- Performance testing
+
+## Documentation
+
+- [INSTRUCTIONS.md](INSTRUCTIONS.md) - Full project timeline & workflow
+- [TECH_STACK_EVALUATION.md](TECH_STACK_EVALUATION.md) - Technology comparison
+- [WEEK_17_11_25.md](WEEK_17_11_25.md) - Week 2 milestone documentation
+- [claude.md](claude.md) - Project reference guide
+
+## Testing
+
+Run automated tests:
+```bash
+cd backend
+source venv/bin/activate
+python test_upload.py
+```
+
+## Project Goals
+
+- 80%+ accuracy on plagiarism detection
+- Processing time < 30 seconds per comparison
+- User-friendly web interface
+- Comprehensive testing with 15-20 participants
+- 6,000-word technical report
+
+**Project Timeline:** 22/9/25 - 4/5/26 (32 weeks)
+**Current Phase:** Week 2 of 32 - Implementation phase

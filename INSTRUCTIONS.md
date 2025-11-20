@@ -112,13 +112,13 @@ git push -u origin claude/[milestone-name]-[session-id]
 - Comparison notes
 - Simple documentation
 
-### Week 17/11/25 (NEXT)
+### Week 17/11/25 ✅ COMPLETED
 - Flask app with upload route
 - Basic frontend with file input
 - Waveform display functionality
 - Testing with MP3/WAV files
 
-### Week 24/11/25
+### Week 24/11/25 (NEXT)
 - Feature extraction module (MFCC/Chroma)
 - Integration with upload system
 - Save/retrieve extracted features
@@ -162,12 +162,13 @@ Before committing, ask:
 
 **Completed Milestones:**
 - ✅ Week 10/11/25: Development environment setup + experiments
+- ✅ Week 17/11/25: Audio file upload and basic waveform display
 
 **Next Milestone:**
-- ⏭️ Week 17/11/25: Audio file upload and basic waveform display
+- ⏭️ Week 24/11/25: Develop feature extraction module (MFCC or chroma features)
 
 **Current Branch:**
-- `claude/setup-audio-dev-environment-01AtA6JpbkRzaxw56wgkyAzv`
+- `claude/week-17-11-25-milestone-01Wi2sstenjWAxzAnYDKy9Sy`
 
 ## Notes for AI Assistant
 
@@ -201,4 +202,4 @@ Each milestone should be testable:
 - 6,000-word technical report
 - Code documentation
 
-**Current Phase:** Week 1 of 32 weeks - Experimentation phase ✅
+**Current Phase:** Week 2 of 32 weeks - Implementation phase ✅
