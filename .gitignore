@@ -38,6 +38,9 @@ Thumbs.db
 *.wav
 !backend/experiments/test_audio.wav
 
+# Uploads folder
+backend/uploads/
+
 # Generated files
 backend/experiments/*.png
 backend/experiments/*.json
