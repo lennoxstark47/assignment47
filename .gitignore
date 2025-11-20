@@ -41,6 +41,9 @@ Thumbs.db
 # Uploads folder
 backend/uploads/
 
+# Features folder (extracted audio features)
+backend/features/
+
 # Generated files
 backend/experiments/*.png
 backend/experiments/*.json
