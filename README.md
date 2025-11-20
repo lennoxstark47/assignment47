@@ -2,7 +2,7 @@
 
 **Project:** Web-Based Music Plagiarism Detection
 **Duration:** September 2025 - May 2026
-**Current Status:** Week 17/11/25 - Audio Upload & Waveform Display ✅
+**Current Status:** Week 24/11/25 - Feature Extraction Module ✅
 
 ## Project Overview
 
@@ -25,14 +25,24 @@ A web application for detecting melodic and rhythmic similarities between music 
 - Audio metadata extraction
 - [View Details](WEEK_17_11_25.md)
 
+**Week 24/11/25: Feature Extraction Module**
+- MFCC and Chroma feature extraction
+- Automatic feature extraction on upload
+- Feature storage and retrieval API
+- Performance testing (0.029s avg extraction time)
+- [View Details](WEEK_24_11_25.md)
+
 ## Project Structure
 
 ```
 assignment47/
 ├── backend/
 │   ├── app.py                          # Flask application
-│   ├── test_upload.py                  # Test script
+│   ├── feature_extractor.py            # Feature extraction module
+│   ├── test_upload.py                  # Upload test script
+│   ├── test_features.py                # Feature extraction tests
 │   ├── requirements.txt                # Python dependencies
+│   ├── features/                       # Extracted features storage
 │   └── experiments/
 │       ├── librosa_experiment.py       # Feature extraction demo
 │       ├── test_audio.wav              # Test audio (5 seconds)
@@ -46,6 +56,7 @@ assignment47/
 ├── INSTRUCTIONS.md                     # Project timeline & workflow
 ├── TECH_STACK_EVALUATION.md            # Technology comparison
 ├── WEEK_17_11_25.md                    # Week 2 milestone docs
+├── WEEK_24_11_25.md                    # Week 3 milestone docs
 └── README.md                           # This file
 ```
 
@@ -103,8 +114,10 @@ python3 -m http.server 8000
 
 ### Backend API
 - ✅ RESTful upload endpoint (`POST /api/upload`)
+- ✅ Feature extraction endpoints (`GET /api/features`, `GET /api/features/<file_id>`)
 - ✅ Health check endpoint (`GET /api/health`)
 - ✅ Librosa-based audio processing
+- ✅ MFCC and Chroma feature extraction
 - ✅ Automated testing suite
 
 ## Technology Stack
@@ -120,33 +133,46 @@ python3 -m http.server 8000
 - Canvas API (Waveform visualization)
 - Responsive design (no frameworks yet)
 
+**Audio Features:**
+- ✅ MFCC extraction (13 coefficients)
+- ✅ Chroma features (12 pitch classes)
+- ✅ Tempo and beat detection
+- ✅ Feature storage and retrieval
+
 **Planned:**
-- Feature extraction (MFCC, Chroma) - Week 24/11/25
 - Similarity algorithms (DTW, Cosine) - Week 1/12/25
 - Comparison visualization - Week 8/12/25
 
 ## Next Milestone
 
-**Week 24/11/25: Feature Extraction Module**
-- Develop MFCC/Chroma extraction module
-- Integrate with upload system
-- Save/retrieve extracted features
-- Performance testing
+**Week 1/12/25: Similarity Calculation Algorithm**
+- Implement DTW (Dynamic Time Warping) algorithm
+- Implement Cosine similarity calculation
+- Create comparison API endpoint
+- Test with similar and different tracks
 
 ## Documentation
 
 - [INSTRUCTIONS.md](INSTRUCTIONS.md) - Full project timeline & workflow
 - [TECH_STACK_EVALUATION.md](TECH_STACK_EVALUATION.md) - Technology comparison
 - [WEEK_17_11_25.md](WEEK_17_11_25.md) - Week 2 milestone documentation
+- [WEEK_24_11_25.md](WEEK_24_11_25.md) - Week 3 milestone documentation
 - [claude.md](claude.md) - Project reference guide
 
 ## Testing
 
-Run automated tests:
+**Upload Tests:**
 ```bash
 cd backend
 source venv/bin/activate
 python test_upload.py
+```
+
+**Feature Extraction Tests:**
+```bash
+cd backend
+source venv/bin/activate
+python test_features.py
 ```
 
 ## Project Goals
@@ -158,4 +184,4 @@ python test_upload.py
 - 6,000-word technical report
 
 **Project Timeline:** 22/9/25 - 4/5/26 (32 weeks)
-**Current Phase:** Week 2 of 32 - Implementation phase
+**Current Phase:** Week 3 of 32 - Implementation phase
