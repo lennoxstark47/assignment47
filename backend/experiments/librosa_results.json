@@ -1,0 +1,33 @@
+{
+  "mfcc": {
+    "shape": [
+      13,
+      216
+    ],
+    "extraction_time": 21.69263768196106,
+    "mean": -42.068193881226435,
+    "std": 106.4368461827312
+  },
+  "chroma": {
+    "shape": [
+      12,
+      216
+    ],
+    "extraction_time": 0.02046513557434082,
+    "dominant_pitch_class": 9
+  },
+  "spectral": {
+    "extraction_time": 0.02461981773376465,
+    "spectral_centroid_mean": 698.142078078605,
+    "spectral_rolloff_mean": 912.0707194010416,
+    "zero_crossing_rate_mean": 0.03963894314236111
+  },
+  "tempo": {
+    "extraction_time": 0.034624576568603516,
+    "tempo_bpm": 112.34714673913044
+  },
+  "similarity": {
+    "calculation_time": 0.15340256690979004,
+    "cosine_similarity": 1.0000000000000018
+  }
+}
