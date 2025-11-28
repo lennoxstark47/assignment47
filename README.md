@@ -2,7 +2,7 @@
 
 **Project:** Web-Based Music Plagiarism Detection
 **Duration:** September 2025 - May 2026
-**Current Status:** Week 1/12/25 - Similarity Calculation Algorithm ✅
+**Current Status:** Week 8/12/25 - Comparison Visualization Interface ✅
 
 ## Project Overview
 
@@ -39,6 +39,14 @@ A web application for detecting melodic and rhythmic similarities between music 
 - Comprehensive test suite with synthetic audio
 - [View Details](WEEK_01_12_25.md)
 
+**Week 8/12/25: Comparison Visualization Interface**
+- Dual file upload interface with drag-and-drop
+- Side-by-side waveform comparison display
+- Overall similarity score with visual indicator
+- Detailed MFCC and Chroma metrics display
+- Responsive, modern UI with gradient design
+- [View Details](WEEK_08_12_25.md)
+
 ## Project Structure
 
 ```
@@ -66,7 +74,8 @@ assignment47/
 ├── TECH_STACK_EVALUATION.md            # Technology comparison
 ├── WEEK_17_11_25.md                    # Week 2 milestone docs
 ├── WEEK_24_11_25.md                    # Week 3 milestone docs
-├── WEEK_01_12_25.md                    # Week 4 milestone docs (NEW)
+├── WEEK_01_12_25.md                    # Week 4 milestone docs
+├── WEEK_08_12_25.md                    # Week 5 milestone docs (NEW)
 └── README.md                           # This file
 ```
 
@@ -158,16 +167,19 @@ python3 -m http.server 8000
 - ✅ Overall similarity scoring (0-100%)
 - ✅ Similarity level classification
 
-**Planned:**
-- Comparison visualization - Week 8/12/25
+**Comparison Visualization:**
+- ✅ Dual file upload interface
+- ✅ Side-by-side waveform display
+- ✅ Overall similarity score visualization
+- ✅ Detailed MFCC and Chroma metrics
 
 ## Next Milestone
 
-**Week 8/12/25: Comparison Visualization Interface**
-- Build visual comparison interface
-- Display similarity scores and metrics
-- Highlight matching sections
-- Create side-by-side waveform comparison
+**Week 15/12/25: Test Dataset Compilation**
+- Compile test dataset of audio files
+- Begin initial accuracy testing
+- Document testing methodology
+- Collect baseline performance metrics
 
 ## Documentation
 
@@ -176,6 +188,7 @@ python3 -m http.server 8000
 - [WEEK_17_11_25.md](WEEK_17_11_25.md) - Week 2 milestone documentation
 - [WEEK_24_11_25.md](WEEK_24_11_25.md) - Week 3 milestone documentation
 - [WEEK_01_12_25.md](WEEK_01_12_25.md) - Week 4 milestone documentation
+- [WEEK_08_12_25.md](WEEK_08_12_25.md) - Week 5 milestone documentation
 - [claude.md](claude.md) - Project reference guide
 
 ## Testing
@@ -210,4 +223,4 @@ python test_similarity.py
 - 6,000-word technical report
 
 **Project Timeline:** 22/9/25 - 4/5/26 (32 weeks)
-**Current Phase:** Week 4 of 32 - Implementation phase
+**Current Phase:** Week 5 of 32 - Implementation phase
