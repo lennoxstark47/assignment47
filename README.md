@@ -2,7 +2,7 @@
 
 **Project:** Web-Based Music Plagiarism Detection
 **Duration:** September 2025 - May 2026
-**Current Status:** Week 24/11/25 - Feature Extraction Module ✅
+**Current Status:** Week 1/12/25 - Similarity Calculation Algorithm ✅
 
 ## Project Overview
 
@@ -32,6 +32,13 @@ A web application for detecting melodic and rhythmic similarities between music 
 - Performance testing (0.029s avg extraction time)
 - [View Details](WEEK_24_11_25.md)
 
+**Week 1/12/25: Similarity Calculation Algorithm**
+- DTW (Dynamic Time Warping) implementation
+- Cosine similarity calculation
+- Comparison API endpoint (`POST /api/compare`)
+- Comprehensive test suite with synthetic audio
+- [View Details](WEEK_01_12_25.md)
+
 ## Project Structure
 
 ```
@@ -39,8 +46,10 @@ assignment47/
 ├── backend/
 │   ├── app.py                          # Flask application
 │   ├── feature_extractor.py            # Feature extraction module
+│   ├── similarity_calculator.py        # Similarity calculation module (NEW)
 │   ├── test_upload.py                  # Upload test script
 │   ├── test_features.py                # Feature extraction tests
+│   ├── test_similarity.py              # Similarity calculation tests (NEW)
 │   ├── requirements.txt                # Python dependencies
 │   ├── features/                       # Extracted features storage
 │   └── experiments/
@@ -57,6 +66,7 @@ assignment47/
 ├── TECH_STACK_EVALUATION.md            # Technology comparison
 ├── WEEK_17_11_25.md                    # Week 2 milestone docs
 ├── WEEK_24_11_25.md                    # Week 3 milestone docs
+├── WEEK_01_12_25.md                    # Week 4 milestone docs (NEW)
 └── README.md                           # This file
 ```
 
@@ -115,9 +125,11 @@ python3 -m http.server 8000
 ### Backend API
 - ✅ RESTful upload endpoint (`POST /api/upload`)
 - ✅ Feature extraction endpoints (`GET /api/features`, `GET /api/features/<file_id>`)
+- ✅ Comparison endpoint (`POST /api/compare`)
 - ✅ Health check endpoint (`GET /api/health`)
 - ✅ Librosa-based audio processing
 - ✅ MFCC and Chroma feature extraction
+- ✅ DTW and Cosine similarity algorithms
 - ✅ Automated testing suite
 
 ## Technology Stack
@@ -139,17 +151,23 @@ python3 -m http.server 8000
 - ✅ Tempo and beat detection
 - ✅ Feature storage and retrieval
 
+**Similarity Calculation:**
+- ✅ Dynamic Time Warping (DTW) algorithm
+- ✅ Cosine similarity calculation
+- ✅ Euclidean distance metrics
+- ✅ Overall similarity scoring (0-100%)
+- ✅ Similarity level classification
+
 **Planned:**
-- Similarity algorithms (DTW, Cosine) - Week 1/12/25
 - Comparison visualization - Week 8/12/25
 
 ## Next Milestone
 
-**Week 1/12/25: Similarity Calculation Algorithm**
-- Implement DTW (Dynamic Time Warping) algorithm
-- Implement Cosine similarity calculation
-- Create comparison API endpoint
-- Test with similar and different tracks
+**Week 8/12/25: Comparison Visualization Interface**
+- Build visual comparison interface
+- Display similarity scores and metrics
+- Highlight matching sections
+- Create side-by-side waveform comparison
 
 ## Documentation
 
@@ -157,6 +175,7 @@ python3 -m http.server 8000
 - [TECH_STACK_EVALUATION.md](TECH_STACK_EVALUATION.md) - Technology comparison
 - [WEEK_17_11_25.md](WEEK_17_11_25.md) - Week 2 milestone documentation
 - [WEEK_24_11_25.md](WEEK_24_11_25.md) - Week 3 milestone documentation
+- [WEEK_01_12_25.md](WEEK_01_12_25.md) - Week 4 milestone documentation
 - [claude.md](claude.md) - Project reference guide
 
 ## Testing
@@ -175,6 +194,13 @@ source venv/bin/activate
 python test_features.py
 ```
 
+**Similarity Calculation Tests:**
+```bash
+cd backend
+source venv/bin/activate
+python test_similarity.py
+```
+
 ## Project Goals
 
 - 80%+ accuracy on plagiarism detection
@@ -184,4 +210,4 @@ python test_features.py
 - 6,000-word technical report
 
 **Project Timeline:** 22/9/25 - 4/5/26 (32 weeks)
-**Current Phase:** Week 3 of 32 - Implementation phase
+**Current Phase:** Week 4 of 32 - Implementation phase
