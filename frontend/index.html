@@ -211,33 +211,268 @@
             margin-top: 40px;
             opacity: 0.8;
         }
+
+        /* New styles for comparison interface */
+        .upload-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .upload-section h2 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            text-align: center;
+        }
+
+        .file-preview {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f0f0ff;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .file-preview.active {
+            display: block;
+        }
+
+        .file-preview h4 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .preview-item {
+            font-size: 0.9em;
+            color: #555;
+            margin: 5px 0;
+        }
+
+        .compare-section {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .compare-button {
+            font-size: 1.2em;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        .compare-button:hover {
+            box-shadow: 0 5px 20px rgba(56, 239, 125, 0.4);
+        }
+
+        .comparison-results {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+
+        .comparison-results h2 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2em;
+            text-align: center;
+        }
+
+        .similarity-score-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .similarity-percentage {
+            font-size: 4em;
+            font-weight: bold;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .similarity-level {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            opacity: 0.95;
+        }
+
+        .similarity-description {
+            font-size: 1.1em;
+            opacity: 0.85;
+        }
+
+        .waveform-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .waveform-container {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .waveform-container h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            text-align: center;
+        }
+
+        .waveform-container canvas {
+            width: 100%;
+            height: 150px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fafafa;
+            margin-bottom: 15px;
+        }
+
+        .metrics-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .metric-card {
+            background: #f8f9ff;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+
+        .metric-card h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .metric-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .metric-item:last-child {
+            border-bottom: none;
+        }
+
+        .metric-label {
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        .metric-value {
+            font-weight: bold;
+            color: #333;
+            font-size: 1em;
+        }
+
+        .metric-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .metric-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.5s ease;
+        }
+
+        @media (max-width: 768px) {
+            .upload-container,
+            .waveform-comparison,
+            .metrics-section {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
             <h1>🎵 Audio Similarity Detection</h1>
-            <p>Week 17/11/25: Audio Upload & Waveform Display</p>
+            <p>Week 8/12/25: Comparison Visualization Interface</p>
         </header>
 
-        <div class="upload-section">
-            <div class="upload-area" id="uploadArea">
-                <div class="upload-icon">📁</div>
-                <div class="upload-text">Click or drag & drop audio file here</div>
-                <div class="upload-hint">Supported formats: MP3, WAV, OGG, FLAC, M4A (Max 10MB)</div>
-                <input type="file" id="fileInput" accept=".mp3,.wav,.ogg,.flac,.m4a,audio/*">
-                <button class="button" id="selectButton">Select File</button>
+        <!-- File Upload Sections -->
+        <div class="upload-container">
+            <!-- File 1 Upload -->
+            <div class="upload-section">
+                <h2>📄 File 1</h2>
+                <div class="upload-area" id="uploadArea1">
+                    <div class="upload-icon">📁</div>
+                    <div class="upload-text">Click or drag & drop audio file here</div>
+                    <div class="upload-hint">Supported: MP3, WAV, OGG, FLAC, M4A</div>
+                    <input type="file" id="fileInput1" accept=".mp3,.wav,.ogg,.flac,.m4a,audio/*">
+                    <button class="button" id="selectButton1">Select File 1</button>
+                </div>
+                <div class="status-message" id="statusMessage1"></div>
+                <div class="file-preview" id="filePreview1"></div>
             </div>
 
-            <div class="status-message" id="statusMessage"></div>
+            <!-- File 2 Upload -->
+            <div class="upload-section">
+                <h2>📄 File 2</h2>
+                <div class="upload-area" id="uploadArea2">
+                    <div class="upload-icon">📁</div>
+                    <div class="upload-text">Click or drag & drop audio file here</div>
+                    <div class="upload-hint">Supported: MP3, WAV, OGG, FLAC, M4A</div>
+                    <input type="file" id="fileInput2" accept=".mp3,.wav,.ogg,.flac,.m4a,audio/*">
+                    <button class="button" id="selectButton2">Select File 2</button>
+                </div>
+                <div class="status-message" id="statusMessage2"></div>
+                <div class="file-preview" id="filePreview2"></div>
+            </div>
         </div>
 
-        <div class="waveform-section" id="waveformSection">
-            <h2>Audio Waveform</h2>
+        <!-- Compare Button -->
+        <div class="compare-section" id="compareSection" style="display: none;">
+            <button class="button compare-button" id="compareButton">
+                🔍 Compare Audio Files
+            </button>
+        </div>
 
-            <div class="audio-info" id="audioInfo"></div>
+        <!-- Comparison Results -->
+        <div class="comparison-results" id="comparisonResults" style="display: none;">
+            <h2>Comparison Results</h2>
 
-            <canvas id="waveformCanvas"></canvas>
+            <!-- Overall Similarity Score -->
+            <div class="similarity-score-card" id="similarityScoreCard"></div>
+
+            <!-- Side-by-side Waveforms -->
+            <div class="waveform-comparison">
+                <div class="waveform-container">
+                    <h3>File 1 Waveform</h3>
+                    <canvas id="waveformCanvas1"></canvas>
+                    <div class="audio-info" id="audioInfo1"></div>
+                </div>
+                <div class="waveform-container">
+                    <h3>File 2 Waveform</h3>
+                    <canvas id="waveformCanvas2"></canvas>
+                    <div class="audio-info" id="audioInfo2"></div>
+                </div>
+            </div>
+
+            <!-- Detailed Metrics -->
+            <div class="metrics-section" id="metricsSection"></div>
         </div>
 
         <footer>
@@ -248,76 +483,86 @@
     <script>
         const API_URL = 'http://localhost:5000';
 
-        const uploadArea = document.getElementById('uploadArea');
-        const fileInput = document.getElementById('fileInput');
-        const selectButton = document.getElementById('selectButton');
-        const statusMessage = document.getElementById('statusMessage');
-        const waveformSection = document.getElementById('waveformSection');
-        const audioInfo = document.getElementById('audioInfo');
-        const waveformCanvas = document.getElementById('waveformCanvas');
+        // State management
+        let uploadedFiles = {
+            file1: null,
+            file2: null
+        };
 
-        // Click to select file
-        uploadArea.addEventListener('click', () => fileInput.click());
-        selectButton.addEventListener('click', (e) => {
-            e.stopPropagation();
-            fileInput.click();
-        });
+        // Initialize file upload handlers for both files
+        function initializeFileUpload(fileNumber) {
+            const uploadArea = document.getElementById(`uploadArea${fileNumber}`);
+            const fileInput = document.getElementById(`fileInput${fileNumber}`);
+            const selectButton = document.getElementById(`selectButton${fileNumber}`);
+            const statusMessage = document.getElementById(`statusMessage${fileNumber}`);
+            const filePreview = document.getElementById(`filePreview${fileNumber}`);
 
-        // File input change
-        fileInput.addEventListener('change', (e) => {
-            if (e.target.files.length > 0) {
-                handleFile(e.target.files[0]);
-            }
-        });
+            // Click to select file
+            uploadArea.addEventListener('click', () => fileInput.click());
+            selectButton.addEventListener('click', (e) => {
+                e.stopPropagation();
+                fileInput.click();
+            });
 
-        // Drag and drop handlers
-        uploadArea.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            uploadArea.classList.add('dragover');
-        });
+            // File input change
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    handleFileUpload(e.target.files[0], fileNumber);
+                }
+            });
 
-        uploadArea.addEventListener('dragleave', () => {
-            uploadArea.classList.remove('dragover');
-        });
+            // Drag and drop handlers
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('dragover');
+            });
 
-        uploadArea.addEventListener('drop', (e) => {
-            e.preventDefault();
-            uploadArea.classList.remove('dragover');
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.classList.remove('dragover');
+            });
 
-            if (e.dataTransfer.files.length > 0) {
-                handleFile(e.dataTransfer.files[0]);
-            }
-        });
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('dragover');
 
-        function showMessage(message, type) {
+                if (e.dataTransfer.files.length > 0) {
+                    handleFileUpload(e.dataTransfer.files[0], fileNumber);
+                }
+            });
+        }
+
+        // Initialize both file uploads
+        initializeFileUpload(1);
+        initializeFileUpload(2);
+
+        // Initialize compare button
+        const compareButton = document.getElementById('compareButton');
+        compareButton.addEventListener('click', compareFiles);
+
+        function showMessage(message, type, fileNumber) {
+            const statusMessage = document.getElementById(`statusMessage${fileNumber}`);
             statusMessage.textContent = message;
             statusMessage.className = `status-message ${type}`;
             statusMessage.style.display = 'block';
         }
 
-        function hideMessage() {
-            statusMessage.style.display = 'none';
-        }
-
-        async function handleFile(file) {
+        async function handleFileUpload(file, fileNumber) {
             // Validate file type
-            const allowedTypes = ['audio/mpeg', 'audio/wav', 'audio/ogg', 'audio/flac', 'audio/mp4', 'audio/x-m4a'];
             const allowedExtensions = ['.mp3', '.wav', '.ogg', '.flac', '.m4a'];
-
             const fileExtension = '.' + file.name.split('.').pop().toLowerCase();
+
             if (!allowedExtensions.includes(fileExtension)) {
-                showMessage('Invalid file type. Please select an audio file.', 'error');
+                showMessage('Invalid file type. Please select an audio file.', 'error', fileNumber);
                 return;
             }
 
             // Validate file size (10MB)
             if (file.size > 10 * 1024 * 1024) {
-                showMessage('File is too large. Maximum size is 10MB.', 'error');
+                showMessage('File is too large. Maximum size is 10MB.', 'error', fileNumber);
                 return;
             }
 
-            showMessage(`Uploading ${file.name}...`, 'info');
-            waveformSection.style.display = 'none';
+            showMessage(`Uploading ${file.name}...`, 'info', fileNumber);
 
             // Create form data
             const formData = new FormData();
@@ -332,22 +577,122 @@
                 const data = await response.json();
 
                 if (response.ok) {
-                    showMessage(data.message, 'success');
-                    displayWaveform(data);
+                    showMessage('Upload successful!', 'success', fileNumber);
+                    uploadedFiles[`file${fileNumber}`] = data;
+                    displayFilePreview(data, fileNumber);
+                    checkBothFilesUploaded();
                 } else {
-                    showMessage(data.error || 'Upload failed', 'error');
+                    showMessage(data.error || 'Upload failed', 'error', fileNumber);
                 }
             } catch (error) {
-                showMessage(`Error: ${error.message}. Make sure the backend server is running.`, 'error');
+                showMessage(`Error: ${error.message}. Make sure the backend server is running.`, 'error', fileNumber);
                 console.error('Upload error:', error);
             }
         }
 
-        function displayWaveform(data) {
-            // Show waveform section
-            waveformSection.style.display = 'block';
+        function displayFilePreview(data, fileNumber) {
+            const filePreview = document.getElementById(`filePreview${fileNumber}`);
+            filePreview.className = 'file-preview active';
+            filePreview.innerHTML = `
+                <h4>✓ ${data.filename}</h4>
+                <div class="preview-item">Duration: ${data.duration.toFixed(2)}s</div>
+                <div class="preview-item">Sample Rate: ${data.sample_rate} Hz</div>
+                <div class="preview-item">Features Extracted: Yes</div>
+            `;
+        }
 
-            // Display audio info
+        function checkBothFilesUploaded() {
+            if (uploadedFiles.file1 && uploadedFiles.file2) {
+                document.getElementById('compareSection').style.display = 'block';
+                document.getElementById('compareSection').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        async function compareFiles() {
+            if (!uploadedFiles.file1 || !uploadedFiles.file2) {
+                alert('Please upload both files first');
+                return;
+            }
+
+            compareButton.disabled = true;
+            compareButton.textContent = '⏳ Comparing...';
+
+            try {
+                const response = await fetch(`${API_URL}/api/compare`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        file_id_1: uploadedFiles.file1.file_id,
+                        file_id_2: uploadedFiles.file2.file_id
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    displayComparisonResults(data.comparison);
+                } else {
+                    alert(data.error || 'Comparison failed');
+                }
+            } catch (error) {
+                alert(`Error: ${error.message}`);
+                console.error('Comparison error:', error);
+            } finally {
+                compareButton.disabled = false;
+                compareButton.textContent = '🔍 Compare Audio Files';
+            }
+        }
+
+        function displayComparisonResults(comparison) {
+            const resultsSection = document.getElementById('comparisonResults');
+            resultsSection.style.display = 'block';
+
+            // Display similarity score
+            displaySimilarityScore(comparison);
+
+            // Display waveforms side by side
+            displayWaveforms();
+
+            // Display detailed metrics
+            displayMetrics(comparison);
+
+            // Scroll to results
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function displaySimilarityScore(comparison) {
+            const scoreCard = document.getElementById('similarityScoreCard');
+            const percentage = comparison.overall_similarity.toFixed(1);
+            const level = comparison.similarity_level;
+
+            let description = '';
+            if (level === 'Very High') description = 'These files are very similar!';
+            else if (level === 'High') description = 'These files have high similarity';
+            else if (level === 'Moderate') description = 'These files have moderate similarity';
+            else if (level === 'Low') description = 'These files have low similarity';
+            else description = 'These files are quite different';
+
+            scoreCard.innerHTML = `
+                <div class="similarity-level">${level} Similarity</div>
+                <div class="similarity-percentage">${percentage}%</div>
+                <div class="similarity-description">${description}</div>
+            `;
+        }
+
+        function displayWaveforms() {
+            // Draw File 1 waveform
+            drawWaveform(uploadedFiles.file1.waveform, 'waveformCanvas1');
+            displayAudioInfo(uploadedFiles.file1, 'audioInfo1');
+
+            // Draw File 2 waveform
+            drawWaveform(uploadedFiles.file2.waveform, 'waveformCanvas2');
+            displayAudioInfo(uploadedFiles.file2, 'audioInfo2');
+        }
+
+        function displayAudioInfo(data, elementId) {
+            const audioInfo = document.getElementById(elementId);
             audioInfo.innerHTML = `
                 <div class="info-card">
                     <div class="info-label">Filename</div>
@@ -361,30 +706,16 @@
                     <div class="info-label">Sample Rate</div>
                     <div class="info-value">${data.sample_rate} Hz</div>
                 </div>
-                <div class="info-card">
-                    <div class="info-label">Total Samples</div>
-                    <div class="info-value">${data.num_samples.toLocaleString()}</div>
-                </div>
-                <div class="info-card">
-                    <div class="info-label">RMS Energy</div>
-                    <div class="info-value">${data.rms.toFixed(4)}</div>
-                </div>
             `;
-
-            // Draw waveform
-            drawWaveform(data.waveform);
-
-            // Scroll to waveform
-            waveformSection.scrollIntoView({ behavior: 'smooth' });
         }
 
-        function drawWaveform(samples) {
-            const canvas = waveformCanvas;
+        function drawWaveform(samples, canvasId) {
+            const canvas = document.getElementById(canvasId);
             const ctx = canvas.getContext('2d');
 
             // Set canvas size
             canvas.width = canvas.offsetWidth;
-            canvas.height = 200;
+            canvas.height = 150;
 
             // Clear canvas
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -430,16 +761,52 @@
             ctx.fill();
         }
 
-        // Responsive canvas resize
-        window.addEventListener('resize', () => {
-            if (waveformSection.style.display !== 'none') {
-                // Redraw waveform on resize if data exists
-                const canvas = waveformCanvas;
-                if (canvas.waveformData) {
-                    drawWaveform(canvas.waveformData);
-                }
-            }
-        });
+        function displayMetrics(comparison) {
+            const metricsSection = document.getElementById('metricsSection');
+
+            const mfcc = comparison.mfcc_comparison;
+            const chroma = comparison.chroma_comparison;
+
+            metricsSection.innerHTML = `
+                <div class="metric-card">
+                    <h3>🎵 MFCC Comparison (Timbre/Texture)</h3>
+                    <div class="metric-item">
+                        <span class="metric-label">Cosine Similarity</span>
+                        <span class="metric-value">${(mfcc.cosine_similarity * 100).toFixed(1)}%</span>
+                    </div>
+                    <div class="metric-bar">
+                        <div class="metric-bar-fill" style="width: ${mfcc.cosine_similarity * 100}%"></div>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">DTW Distance</span>
+                        <span class="metric-value">${mfcc.dtw_distance.toFixed(4)}</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">Euclidean Distance</span>
+                        <span class="metric-value">${mfcc.euclidean_distance.toFixed(2)}</span>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <h3>🎹 Chroma Comparison (Harmony/Melody)</h3>
+                    <div class="metric-item">
+                        <span class="metric-label">Cosine Similarity</span>
+                        <span class="metric-value">${(chroma.cosine_similarity * 100).toFixed(1)}%</span>
+                    </div>
+                    <div class="metric-bar">
+                        <div class="metric-bar-fill" style="width: ${chroma.cosine_similarity * 100}%"></div>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">DTW Distance</span>
+                        <span class="metric-value">${chroma.dtw_distance.toFixed(4)}</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">Euclidean Distance</span>
+                        <span class="metric-value">${chroma.euclidean_distance.toFixed(2)}</span>
+                    </div>
+                </div>
+            `;
+        }
     </script>
 </body>
 </html>
