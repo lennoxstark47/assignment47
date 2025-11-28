@@ -2,6 +2,7 @@
 Flask application for audio file upload and waveform display
 Week 17/11/25 Milestone
 Enhanced with feature extraction - Week 24/11/25 Milestone
+Enhanced with similarity calculation - Week 1/12/25 Milestone
 """
 
 from flask import Flask, request, jsonify, send_from_directory
@@ -11,6 +12,7 @@ import os
 import librosa
 import numpy as np
 from feature_extractor import AudioFeatureExtractor
+from similarity_calculator import SimilarityCalculator
 import uuid
 
 app = Flask(__name__, static_folder='../frontend', static_url_path='')
@@ -30,8 +32,9 @@ app.config['MAX_CONTENT_LENGTH'] = MAX_FILE_SIZE
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(FEATURES_FOLDER, exist_ok=True)
 
-# Initialize feature extractor
+# Initialize feature extractor and similarity calculator
 feature_extractor = AudioFeatureExtractor()
+similarity_calculator = SimilarityCalculator()
 
 
 def allowed_file(filename):
@@ -217,17 +220,85 @@ def list_features():
         return jsonify({'error': f'Error listing features: {str(e)}'}), 500
 
 
+@app.route('/api/compare', methods=['POST'])
+def compare_files():
+    """
+    Compare two audio files using similarity algorithms
+
+    Week 1/12/25: New endpoint for similarity calculation
+
+    Request body:
+        {
+            "file_id_1": "abc123",
+            "file_id_2": "def456"
+        }
+
+    Returns:
+        JSON with similarity scores and detailed comparison results
+    """
+    try:
+        data = request.get_json()
+
+        if not data or 'file_id_1' not in data or 'file_id_2' not in data:
+            return jsonify({
+                'error': 'Both file_id_1 and file_id_2 are required'
+            }), 400
+
+        file_id_1 = data['file_id_1']
+        file_id_2 = data['file_id_2']
+
+        # Find feature files for both file IDs
+        feature_files = os.listdir(app.config['FEATURES_FOLDER'])
+
+        feature_file_1 = None
+        feature_file_2 = None
+
+        for f in feature_files:
+            if file_id_1 in f and f.endswith('_features.json'):
+                feature_file_1 = os.path.join(app.config['FEATURES_FOLDER'], f)
+            if file_id_2 in f and f.endswith('_features.json'):
+                feature_file_2 = os.path.join(app.config['FEATURES_FOLDER'], f)
+
+        if not feature_file_1:
+            return jsonify({
+                'error': f'Features not found for file_id_1: {file_id_1}'
+            }), 404
+
+        if not feature_file_2:
+            return jsonify({
+                'error': f'Features not found for file_id_2: {file_id_2}'
+            }), 404
+
+        # Calculate similarity
+        comparison_results = similarity_calculator.compare_audio_files(
+            feature_file_1, feature_file_2
+        )
+
+        response = {
+            'file_id_1': file_id_1,
+            'file_id_2': file_id_2,
+            'comparison': comparison_results,
+            'message': 'Comparison completed successfully'
+        }
+
+        return jsonify(response), 200
+
+    except Exception as e:
+        return jsonify({'error': f'Error comparing files: {str(e)}'}), 500
+
+
 @app.route('/api/health', methods=['GET'])
 def health_check():
     """Health check endpoint"""
     return jsonify({
         'status': 'healthy',
-        'message': 'Audio upload service with feature extraction is running'
+        'message': 'Audio upload service with feature extraction and similarity calculation is running'
     }), 200
 
 
 if __name__ == '__main__':
-    print("Starting Flask server for audio upload and waveform display...")
+    print("Starting Flask server for audio upload, waveform display, and similarity calculation...")
     print(f"Upload folder: {os.path.abspath(UPLOAD_FOLDER)}")
+    print(f"Features folder: {os.path.abspath(FEATURES_FOLDER)}")
     print(f"Allowed file types: {', '.join(ALLOWED_EXTENSIONS)}")
     app.run(debug=True, host='0.0.0.0', port=5000)
